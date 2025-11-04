@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HomeController {
 
-    @GetMapping("/") /*  */
+    // Endpoint untuk halaman utama
+    @GetMapping("/")
     public String hello() {
         return "Hay, selamat datang di Spring Boot!";
     }
