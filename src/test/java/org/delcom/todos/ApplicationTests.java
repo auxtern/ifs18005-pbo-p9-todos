@@ -9,6 +9,7 @@ import static org.mockito.Mockito.*;
 
 class ApplicationTest {
 
+	// Test main method menjalankan SpringApplication.run
 	@Test
 	void mainMethod_ShouldRunSpringApplication() throws Exception {
 		// Mock SpringApplication.run untuk test main method
@@ -25,6 +26,7 @@ class ApplicationTest {
 		}
 	}
 
+	// Test bahwa Spring context bisa dimuat tanpa exception
 	@Test
 	void contextLoads_ShouldNotThrowException() throws Exception {
 		// Test bahwa Spring context bisa dimuat
@@ -35,6 +37,7 @@ class ApplicationTest {
 		});
 	}
 
+	// Test bahwa Application class memiliki annotation @SpringBootApplication
 	@Test
 	void todoApplication_ShouldHaveSpringBootAnnotation() throws Exception {
 		// Test bahwa class memiliki annotation @SpringBootApplication
@@ -42,6 +45,7 @@ class ApplicationTest {
 				.getAnnotation(org.springframework.boot.autoconfigure.SpringBootApplication.class));
 	}
 
+	// Test bahwa kita bisa membuat instance Application
 	@Test
 	void todoApplication_CanBeInstantiated() throws Exception {
 		// Test bahwa kita bisa membuat instance Application
