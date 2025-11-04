@@ -2,6 +2,10 @@
 
 ## Logs
 
+### 05-11-2025
+
+- Menambahkan fitur todos
+
 ### 04-11-2025
 
 - Memperbarui kebutuhan paket
