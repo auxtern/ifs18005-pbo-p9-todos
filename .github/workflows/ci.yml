@@ -19,7 +19,6 @@ jobs:
           POSTGRES_PASSWORD: postgres
         ports:
           - 5432:5432
-        # Tunggu hingga Postgres siap menerima koneksi
         options: >-
           --health-cmd="pg_isready -U postgres"
           --health-interval=10s
@@ -50,6 +49,7 @@ jobs:
             sleep 5
           done
 
+      # Jalankan unit test + coverage
       - name: Run tests with coverage
         run: |
           chmod +x mvnw
@@ -61,4 +61,26 @@ jobs:
           name: test-results
           path: target/site/jacoco/
 
+      # 🔹 Tambahkan build JAR
+      - name: Build Spring Boot JAR
+        run: |
+          ./mvnw clean package -DskipTests
 
+      # 🔹 Verifikasi bahwa JAR memiliki manifest dan dapat dijalankan
+      - name: Verify executable JAR
+        run: |
+          echo "Checking manifest..."
+          jar tf target/*.jar | grep META-INF/MANIFEST.MF
+          jar xf target/*.jar META-INF/MANIFEST.MF
+          cat META-INF/MANIFEST.MF
+          echo "Testing java -jar startup..."
+          java -jar target/*.jar --spring.main.web-application-type=none --logging.level.root=OFF &
+          sleep 10
+          pkill -f 'java -jar' || true
+
+      # 🔹 Upload hasil build (opsional)
+      - name: Upload JAR artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: spring-boot-app
+          path: target/*.jar

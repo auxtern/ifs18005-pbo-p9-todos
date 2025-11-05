@@ -12,10 +12,10 @@
 	</parent>
 
 	<groupId>org.delcom</groupId>
-	<artifactId>spring-starter</artifactId>
+	<artifactId>spring-todos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Spring Todo</name>
-	<description>Starter Application with Spring Boot</description>
+	<name>Spring Todos</name>
+	<description>Todo Application with Spring Boot</description>
 
 	<properties>
 		<java.version>25</java.version>
@@ -27,17 +27,9 @@
 		<!-- Versi dependency yang digunakan -->
 		<maven.dependency.mockito.version>5.20.0</maven.dependency.mockito.version>
 		<maven.dependency.jakarta.servlet-api.version>6.1.0</maven.dependency.jakarta.servlet-api.version>
-		<maven.dependency.rest.assured.version>5.5.6</maven.dependency.rest.assured.version>
-		<maven.dependency.jackson.version>2.20.1</maven.dependency.jackson.version>
 	</properties>
 
 	<dependencies>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-
 		<!-- Dependency for Spring Boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -93,34 +85,23 @@
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-
-		<!-- REST Assured core -->
-		<dependency>
-			<groupId>io.rest-assured</groupId>
-			<artifactId>rest-assured</artifactId>
-			<version>${maven.dependency.rest.assured.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<!-- JSONPath (untuk parsing JSON di RestAssured) -->
-		<dependency>
-			<groupId>io.rest-assured</groupId>
-			<artifactId>json-path</artifactId>
-			<version>${maven.dependency.rest.assured.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<!-- Jackson (untuk parsing JSON) -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>${maven.dependency.jackson.version}</version>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+			<!-- Spring Boot Maven Plugin -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 			<!-- dependency plugin tetap jika diperlukan -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
